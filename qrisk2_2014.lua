@@ -1,7 +1,7 @@
 local qrisk = {}
 
 function qrisk.calc_cvd_risk_male(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b_type2,bmi,ethrisk,fh_cvd,rati,sbp,smoke_cat,surv,town)
-	survivor = {
+	local survivor = {
 	0.0,
 	0.0,
 	0.0,
@@ -22,7 +22,7 @@ function qrisk.calc_cvd_risk_male(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b_t
 
 	-- The conditional arrays 
 
-	Iethrisk = {
+	local Iethrisk = {
 	0.0,
 	0.0,
 	0.3567133647493443400000000,
@@ -35,7 +35,7 @@ function qrisk.calc_cvd_risk_male(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b_t
 	-0.1926947742531604500000000
 	};
 
-	Ismoke = {
+	local Ismoke = {
 	0,
 	0.2784649664157046200000000,
 	0.6067834395168959500000000,
@@ -46,14 +46,14 @@ function qrisk.calc_cvd_risk_male(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b_t
 	--Applying the fractional polynomial transforms */
 	--(which includes scaling)                      */
 
-	dage = age * 1.0;
+	local dage = age * 1.0;
 	dage=dage/10;
-	age_1 = math.pow(dage,-1);
-	age_2 = math.pow(dage,2);
-	dbmi = bmi * 1.0;
+	local age_1 = math.pow(dage,-1);
+	local age_2 = math.pow(dage,2);
+	local dbmi = bmi * 1.0;
 	dbmi=dbmi/10;
-	bmi_1 = math.pow(dbmi,-2);
-	bmi_2 = math.pow(dbmi,-2)*math.log(dbmi);
+	local bmi_1 = math.pow(dbmi,-2);
+	local bmi_2 = math.pow(dbmi,-2)*math.log(dbmi);
 
 	--/* Centring the continuous variables */
 
@@ -66,7 +66,7 @@ function qrisk.calc_cvd_risk_male(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b_t
 	town = town - 0.151332527399063;
 
 	--/* Start of Sum */
-	a=0.0;
+	local a=0.0;
 
 	--/* The conditional sums */
 
@@ -139,15 +139,14 @@ function qrisk.calc_cvd_risk_male(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b_t
 
 	--/* Calculate the score itself */
 
-	score = 100.0 * (1.0 - math.pow(survivor[surv + 1], math.exp(a)) );
+	local score = 100.0 * (1.0 - math.pow(survivor[surv + 1], math.exp(a)) );
 
 	return score;
 
 end
 
---[[
 function qrisk.calc_cvd_risk_female(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b_type2,bmi,ethrisk,fh_cvd,rati,sbp,smoke_cat,surv,town)
-	survivor = {
+	local survivor = {
 	0.0,
 	0.0,
 	0.0,
@@ -168,7 +167,7 @@ function qrisk.calc_cvd_risk_female(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b
 
 	-- The conditional arrays 
 
-	Iethrisk = {
+	local Iethrisk = {
 	0,
 	0,
 	0.2671958047902151500000000,
@@ -181,7 +180,7 @@ function qrisk.calc_cvd_risk_female(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b
 	-0.2090388032466696800000000
 	};
 
-	Ismoke = {
+	local Ismoke = {
 	0,
 	0.1947480856528854800000000,
 	0.6229400520450627500000000,
@@ -192,14 +191,14 @@ function qrisk.calc_cvd_risk_female(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b
 	--Applying the fractional polynomial transforms */
 	--(which includes scaling)                      */
 
-	dage = age * 1.0;
+	local dage = age * 1.0;
 	dage=dage/10;
-	age_1 = math.pow(dage,0.5)
-	age_2 = dage
-	dbmi = bmi * 1.0;
+	local age_1 = math.pow(dage,0.5)
+	local age_2 = dage
+	local dbmi = bmi * 1.0;
 	dbmi=dbmi/10;
-	bmi_1 = math.pow(dbmi,-2);
-	bmi_2 = math.pow(dbmi,-2)*math.log(dbmi);
+	local bmi_1 = math.pow(dbmi,-2);
+	local bmi_2 = math.pow(dbmi,-2)*math.log(dbmi);
 
 	--/* Centring the continuous variables */
 
@@ -212,7 +211,7 @@ function qrisk.calc_cvd_risk_female(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b
 	town = town - 0.032508373260498;
 
 	--/* Start of Sum */
-	a=0.0;
+	local a=0.0;
 
 	--/* The conditional sums */
 
@@ -286,10 +285,11 @@ function qrisk.calc_cvd_risk_female(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b
 
 	--/* Calculate the score itself */
 
-	score = 100.0 * (1.0 - math.pow(survivor[surv + 1], math.exp(a)) );
+	local score = 100.0 * (1.0 - math.pow(survivor[surv + 1], math.exp(a)) );
 	return score;
 end
 
+--[[
 local function qrisk2.validate_params()
 	-- validate the arguments here
 	-- unsure whether the type should be coerced
