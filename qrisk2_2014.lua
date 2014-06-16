@@ -1,5 +1,16 @@
+--[[
+Lua implementation of the open source QRISK2-2014 software (see http://svn.clinrisk.co.uk/opensource/qrisk2)
+
+This is a fairly direct translation from c to lua. There may be more efficient or idiomatic means of 
+implementation, but these functions are tested and give the same results as the routines in the clinrisk
+repository
+--]]
+
+
 local qrisk = {}
 
+
+-- See cvd_male_raw in http://svn.clinrisk.co.uk/opensource/qrisk2/c/Q80_model_4_1.c
 function qrisk.calc_cvd_risk_male(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b_type2,bmi,ethrisk,fh_cvd,rati,sbp,smoke_cat,surv,town)
 	survivor = {
 	0.0,
@@ -145,6 +156,7 @@ function qrisk.calc_cvd_risk_male(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b_t
 
 end
 
+-- See cvd_female_raw in http://svn.clinrisk.co.uk/opensource/qrisk2/c/Q80_model_4_0.c
 function qrisk.calc_cvd_risk_female(age,b_AF,b_ra,b_renal,b_treatedhyp,b_type1,b_type2,bmi,ethrisk,fh_cvd,rati,sbp,smoke_cat,surv,town)
 	survivor = {
 	0.0,
